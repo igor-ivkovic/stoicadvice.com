@@ -1,4 +1,4 @@
-@extends('shit')
+@extends('admin')
 
 @section('content')
 
@@ -22,8 +22,9 @@
             <label class="radio-inline"><input type="radio" name="author" @if ($edit->author == "Epictetus") checked @endif value="Epictetus">Epictetus</label>
             <label class="radio-inline"><input type="radio" name="author" @if ($edit->author == "Seneca") checked @endif value="Seneca">Seneca</label>
             <label class="radio-inline"><input type="radio" name="author" @if ($edit->author == "Marcus Aurelius") checked @endif value="Marcus Aurelius">Marcus Aurelius</label>
+            <label class="radio-inline"><input type="radio" name="author" @if ($edit->author == "Various Quotes") checked @endif value="Various Quotes">Various Quotes</label>
 
-        <br /><br />
+            <br /><br />
         <h2>Which book?</h2>
         <br />
 
@@ -31,8 +32,11 @@
             <label class="radio-inline"><input type="radio" name="book" @if ($edit->book == "The Discourses") checked @endif value="The Discourses">The Discourses</label>
             <label class="radio-inline"><input type="radio" name="book" @if ($edit->book == "Moral letters to Lucilius") checked @endif value="Moral letters to Lucilius">Moral letters to Lucilius</label>
             <label class="radio-inline"><input type="radio" name="book" @if ($edit->book == "The Meditations") checked @endif value="The Meditations">The Meditations</label>
+            @if($edit->author == "Various Quotes")
+                <label class="radio-inline"><input type="radio" name="book" checked value="{{ $edit->book or "" }}">Quotes</label>
+            @endif
 
-        <br /><br /><br />
+            <br /><br /><br />
         <div class="form-group">
             <label for="advice">Advice:</label>
             <textarea class="form-control" rows="15" name="advice" id="advice">{{ $edit->advice }}</textarea>

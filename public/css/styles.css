@@ -1,0 +1,266 @@
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+.bluish {
+    background-color: #eef7ff;
+}
+
+.lightbluish {
+    color: #00BFFF;
+}
+
+.centrish {
+    margin: auto;
+    box-shadow: 0 3px 10px 4px rgba(0,0,0,0.1);
+}
+
+
+
+.orange {
+    color: #FFA500;
+}
+
+.soundcloud {
+    background: #fe8c00; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #fe8c00 , #f83600); /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(right, #fe8c00 , #f83600);
+    background: linear-gradient(to left, #fe8c00 , #f83600); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.instagramm {
+    background: #517fa4; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to left, #517fa4 , #243949); /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(right, #517fa4 , #243949);
+    background: linear-gradient(to left, #517fa4 , #243949); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+.maxi {
+    max-width: 758px;
+    margin: auto;
+    padding: 15px;
+}
+
+
+
+.kabbe {
+    max-width: 800px;
+    margin: auto;
+    padding: 15px;
+}
+
+
+
+
+.alatta > p {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-variant: normal;
+    font-weight: 400;
+    line-height: 30px;
+
+}
+
+
+.about > p {
+
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 16px;
+
+}
+
+.father {
+    position: relative;
+    width: 100%;
+}
+
+.son {
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 100%;
+}
+
+.son span {
+    color: white;
+    font: bold 24px/45px Helvetica, Sans-Serif;
+    letter-spacing: -1px;
+    background: rgb(0, 0, 0); /* fallback color */
+    background: rgba(0, 0, 0, 0.7);
+    padding: 10px;
+}
+
+
+
+ul.share-buttons{
+    list-style: none;
+    padding: 0;
+}
+
+ul.share-buttons li{
+    display: inline;
+}
+
+.blue {
+    color: deepskyblue;
+}
+
+.baby {
+    width:100%;
+    height: 100%;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    color: white;
+}
+
+.navbar-inverse {
+    box-shadow: 0 2px 2px rgba(0,0,0,.4);
+}
+
+.margin-for-top {
+    margin-top: 50px;
+}
+
+.margin-for-top20 {
+    margin-top: 20px;
+}
+
+
+.vertical-align {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: row;
+    flex-direction: row;
+}
+
+.vertical-align > [class^="col-"],
+.vertical-align > [class*=" col-"] {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;     /* Align the flex-items vertically */
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; /* Optional, to align inner flex-items
+                              horizontally within the column  */
+}
+
+.quote-background {
+    background: url('../image/pattern/pattern.png'), repeat;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+}
+
+.quote-background h3 {
+    margin-bottom: 0;
+    margin-top: 0;
+}
+
+.quote-background a.amazon {
+    text-decoration: none !important;
+    color: white;
+}
+
+.round-amazon {
+    width: 30px;
+    height: 30px;
+    background-color: #f39c12;
+    border-radius: 100%;
+    display: table;
+    cursor: pointer;
+}
+
+.round-amazon:hover {
+
+    background-color: #f3ba4f;
+
+}
+
+.fa-amazon {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.quote-background a.share {
+    text-decoration: none !important;
+    color: white;
+}
+
+.round-share {
+    width: 30px;
+    height: 30px;
+    background-color: #3498db;
+    border-radius: 100%;
+    display: table;
+    cursor: pointer;
+}
+
+.contain-span {
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+}
+
+.round-share:hover {
+
+    background-color: #72bcdb;
+
+}
+
+.fa-share-alt {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.quote-background a.refresh {
+    text-decoration: none !important;
+    color: white;
+}
+
+.round-refresh {
+    width: 30px;
+    height: 30px;
+    background-color: #2ecc71;
+    border-radius: 100%;
+    display: table;
+    cursor: pointer;
+}
+
+.round-refresh:hover {
+    background-color: #8fcc91;
+
+}
+
+.fa-refresh {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+
+
+
+@media (max-width: 782px) {
+
+    .bakcground {
+        display: initial;
+    }
+
+    .baby {
+        display: initial;
+    }
+
+    .quote-background {
+        margin-top: 70px;
+    }
+}

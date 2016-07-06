@@ -12,21 +12,16 @@
     <!-- Meta for google -->
     <meta name="description" content="Stoic Advice provides random wisdom from stoic philosophers." />
     <meta name="keywords" content="stoic, advice, stoicism, Epictetus, Seneca, Marcus Aurelius, wisdom, philosophy">
+    <meta name="copyright" content="© www.stoicadvice.com" />
+    <meta name="author" lang="en" content="Igor Ivkovic" />
 
+    <!--meta for csrf -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
     <!-- meta for social media -->
-    <meta property="og:url"           content="http://stoicadvice.com/{{ $advices->advice_id or "" }}" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Stoic Advice" />
+    @yield('meta')
 
-    @if(isset($advices->advice))
-        <meta property="og:description"   content="{{ strip_tags($advices->advice) }}" />
-    @else
-        <meta property="og:description"   content="" />
-
-    @endif
-    <meta property="og:image"         content="{{ asset('image/philosophy.jpg') }}" />
 
     <meta name="apple-mobile-web-app-title" content="Stoic Advice">
     <meta name="application-name" content="Stoic Advice">
@@ -53,29 +48,47 @@
     <link rel="mask-icon" href="{{ asset('safari-pinned-tab.svg') }}" color="#5bbad5">
 
 
-
-
-    <!-- My Own Css -->
-    <link href="{{ asset('css/shit.css') }}" rel="stylesheet" type="text/css">
-
-
-
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=PT+Serif:400,700,400italic,700italic&subset=latin,latin-ext"' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Domine:400,700' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Alegreya:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
 
-    <!-- Bootstrap and Jquery -->
+    <!-- Bootstrap -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet" type='text/css'>
-    <script type="text/javascript" src="{{ asset('js/jquery-2.1.4.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/npm.js') }}"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- CSS -->
+    <link href="{{ asset('/css/styles.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/build.css') }}" rel="stylesheet" type="text/css">
+
+    @if(isset($pic))
+    <style type="text/css">
+
+        .background {
+            width:100%;
+            height: 100%;
+
+            background-image: url({{ asset('image/travel/' .$pic. '.jpg') }});
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-attachment: fixed;
+
+            display: table;
+            margin-top: 0px;
+        }
+
+    </style>
+    @endif
 
 
     <!-- Cannonical link -->
-    <link rel="canonical" href="http://stoicadvice.com/{{ $advices->advice_id or "" }}" />
+    <link rel="canonical" href="http://stoicadvice.com/advice/{{ $advices->advice_id or "" }}" />
 
+    <script type="text/javascript">var switchTo5x=true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({publisher: "a499bbb4-baeb-49f5-9211-1489057bb6b5", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
 
 </head>
 <body>
@@ -91,7 +104,7 @@
 
 </script>
 
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -100,18 +113,15 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ asset('/') }}"><span style="color: deepskyblue">STOIC ADVICE</span></a>
+            <a class="navbar-brand" href="{{ asset('/') }}"><img src="{{ asset('image/logo/StoicAdviceLogo.png') }}" alt="logo" height="100%" width="auto"></a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                @if(isset($advices->advice))
-                    <li class="active"><a href="{{ asset('/') }}">Home</a></li>
-                    <li><a href="{{ asset('about') }}">About</a></li>
-                @else
-                    <li><a href="{{ asset('/') }}">Home</a></li>
-                    <li class="active"><a href="{{ asset('about') }}">About</a></li>
-                @endif
-
+                    <li id="quotes"><a href="{{ asset('/') }}">Quotes</a></li>
+                    <li id="advices"><a href="{{ asset('advice') }}">Advices</a></li>
+                    <li id="books"><a href="{{ asset('books') }}">Books</a></li>
+                    <li id="about"><a href="{{ asset('about') }}">About</a></li>
+                    <li id="about"><a href="http://www.givesme.com" target="_blank">Gives Me</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
@@ -125,7 +135,10 @@
 
 
 @yield('content')
-
+<script type="text/javascript" src="{{ asset('js/jquery-2.1.4.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/npm.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/indonesia.js') }}"></script>
 
 </body>
 </html>

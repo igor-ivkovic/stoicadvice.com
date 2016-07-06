@@ -13,9 +13,11 @@
 
 
 
-	Route::get('/', 'WelcomeController@index');
+	Route::get('/', 'WelcomeController@getQuote');
 
-    Route::post('/', 'WelcomeController@newone');
+	Route::get('/{id}', 'WelcomeController@singleQuote')->where('id', '[0-9]+');
+
+    Route::get('json', 'WelcomeController@newQuote');
 
 
 	Route::get('home', 'HomeController@index');
@@ -34,12 +36,21 @@
 
 	Route::post('cms/delete', 'HomeController@delete');
 
+	Route::get('cms/manypost', 'HomeController@getmanypost');
+
+	Route::post('cms/manypost', 'HomeController@storemanypost');
+
 
 // Route::get('auth/register', 'HomeController@register');
 
+	Route::get('advice', 'WelcomeController@index');
 
-	Route::get('/{id}', 'WelcomeController@check')->where('id', '[0-9]+');
+	Route::post('advice', 'WelcomeController@newone');
+
+	Route::get('advice/{id}', 'WelcomeController@check')->where('id', '[0-9]+');
 
     Route::get('about', 'WelcomeController@about');
+
+	Route::get('books', 'WelcomeController@books');
 
 

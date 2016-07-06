@@ -1,9 +1,11 @@
-@extends('boss')
+@extends('guest')
 
 @section('content')
 
 
-    <div class="maxi">
+    <input type="hidden" name="active_page" value="about">
+
+    <div class="maxi margin-for-top">
         <span class="about">
         <p><b><span style="text-decoration: underline">About</span></b></p>
         <p>The websites main goal is to give its users random wisdom from great stoic philosophers. This ancient philosophy is getting new followers in our modern days. It's not surprising because it gives great suggestions how should people lead their life. The followers of stoic philosophy like to meditate on texts from famous stoic thinkers. If you would like to get some guidance from your favorite sage, let fate decide the wisdom you receive! </p>
@@ -30,5 +32,9 @@
     </div>
 
 
+
+@endsection
+
+@section('meta')
 
 @endsection

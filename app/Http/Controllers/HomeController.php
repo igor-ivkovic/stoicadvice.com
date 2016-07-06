@@ -102,6 +102,39 @@ class HomeController extends Controller {
         return redirect()->back();
     }
 
+    public function getmanypost() {
+        return view('cms.manypost');
+    }
+
+    public function storemanypost(Request $request) {
+        $this->validate($request, [
+            'author' => 'required',
+            'book' => 'required'
+        ]);
+
+        $author = $request->author;
+        $book = $request->book;
+
+        for($i =1; $i < 101; $i++) {
+            $advice= $request['advice'.$i];
+
+            if($advice ==="") {
+
+            }
+            elseif(DB::table('advices')->where('advice', $advice)->first()) {
+
+            }
+            else {
+                DB::table('advices')->insert(['advice' => $advice, 'author' => $author, 'book' => $book]);
+            }
+        }
+
+        return redirect('cms/manypost');
+
+
+
+    }
+
 /*
     public function register()
     {

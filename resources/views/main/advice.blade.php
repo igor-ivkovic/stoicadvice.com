@@ -1,4 +1,4 @@
-@extends('boss')
+@extends('guest')
 
 @section('content')
 
@@ -19,20 +19,42 @@
         }(document, 'script', 'facebook-jssdk'));</script>
 
 
+<input type="hidden" name="active_page" value="advices">
 
 
-
-<div class="maxi">
+<div class="maxi margin-for-top">
     <div class="text-center">
         <h1>PICK PHILOSOPHERS</h1>
         <hr />
         <br />
-        <form action="{{ asset('/') }}" method="POST">
-        <label class="checkbox-inline"><input type="checkbox" name="epictetus" {{ $epictetus or "checked" }} value="Epictetus">Epictetus</label>
-        <label class="checkbox-inline"><input type="checkbox" name="seneca" {{ $seneca or "checked" }} value="Seneca">Seneca</label>
-        <label class="checkbox-inline"><input type="checkbox" name="marcus" {{ $marcus or "checked" }} value="Marcus Aurelius">Marcus Aurelius</label>
-        <br /><br /><br />
-        <input type="submit" class="btn btn-success btn-lg" value="NEW ADVICE">
+        <form action="{{ asset('advice') }}" method="POST">
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+
+            <div class="row vertical-align">
+                <div class="col-xs-3">
+                    <div class="checkbox checkbox-info">
+                        <input type="checkbox" id="checkbox1" name="epictetus" {{ $epictetus or "checked" }} value="Epictetus">
+                        <label for="checkbox1">Epictetus</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="checkbox checkbox-info">
+                        <input type="checkbox" id="checkbox2" name="seneca" {{ $seneca or "checked" }} value="Seneca">
+                        <label for="checkbox2">Seneca</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <div class="checkbox checkbox-info checkbox-inline">
+                        <input type="checkbox" id="checkbox3" name="marcus" {{ $marcus or "checked" }} value="Marcus Aurelius">
+                        <label for="checkbox3">Aurelius</label>
+                    </div>
+                </div>
+                <div class="col-xs-3">
+                    <input type="submit" class="btn btn-success btn-xs" value="NEW ADVICE">
+
+                </div>
+            </div>
         </form>
         <br />
     </div>
@@ -71,19 +93,19 @@
 
                     @if($advices->author == "Epictetus")
                         <footer>
-                            <a href="http://amzn.to/1SvyJkz">
+                            <a href="http://amzn.to/299Fohg" target="_blank">
                                 {{ $advices->author }}
                             </a>
                         </footer>
                     @elseif($advices->author == "Seneca")
                         <footer>
-                             <a href="http://amzn.to/1SlAdQ0">
+                             <a href="http://amzn.to/29f0eiD" target="_blank">
                                 {{ $advices->author }}
                              </a>
                         </footer>
                     @else
                         <footer>
-                             <a href="http://amzn.to/1P7jh9I">
+                             <a href="http://amzn.to/29bSsaK" target="_blank">
                                 {{ $advices->author }}
                              </a>
                         </footer>
@@ -96,13 +118,13 @@
             <table style="width:100%; border:0;">
                 <tr>
                     <td class="text-center">
-                        <div class="fb-share-button" data-href="http://stoicadvice.com/{{ $advices->advice_id }}/" data-layout="button"></div>
+                        <div class="fb-share-button" data-href="http://stoicadvice.com/advice/{{ $advices->advice_id }}/" data-layout="button"></div>
                     </td>
                     <td class="text-center">
-                        <div class="g-plus" data-action="share"  data-annotation="none" href="http://stoicadvice.com/{{ $advices->advice_id }}/"></div>
+                        <div class="g-plus" data-action="share"  data-annotation="none" href="http://stoicadvice.com/advice/{{ $advices->advice_id }}/"></div>
                     </td>
                     <td class="text-center">
-                        <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://stoicadvice.com/{{ $advices->advice_id }}/">Tweet</a>
+                        <a href="https://twitter.com/share" class="twitter-share-button"{count} data-url="http://stoicadvice.com/advice/{{ $advices->advice_id }}/">Tweet</a>
                     </td>
                 </tr>
             </table>
@@ -111,4 +133,19 @@
 </div>
 
 
+@endsection
+
+@section('meta')
+    <!-- meta for social media -->
+    <meta property="og:url"           content="http://stoicadvice.com/advice/{{ $advices->advice_id or "" }}" />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Stoic Advice" />
+
+    @if(isset($advices->advice))
+        <meta property="og:description"   content="{{ strip_tags($advices->advice) }}" />
+    @else
+        <meta property="og:description"   content="" />
+
+    @endif
+    <meta property="og:image"         content="{{ asset('image/philosophy.jpg') }}" />
 @endsection

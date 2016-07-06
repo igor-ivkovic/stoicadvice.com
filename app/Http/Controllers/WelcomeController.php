@@ -38,13 +38,9 @@ class WelcomeController extends Controller {
 	 */
 	public function index()
 	{
+		$advices = DB::table('advices')->where('author', 'Epictetus')->orWhere('author', 'Seneca')->orWhere('author', 'Marcus Aurelius')->orderByRaw('RAND()')->first();
 
-		$advices = DB::table('advices')->orderByRaw('RAND()')->first();
-
-
-
-        return redirect(asset($advices->advice_id));
-
+		return redirect('advice/'.$advices->advice_id);
 
 	}
 
@@ -61,7 +57,7 @@ class WelcomeController extends Controller {
 
 		if (isset($epictetus) && isset($seneca) && isset($marcus))
 		{
-			$advices = DB::table('advices')->orderByRaw('RAND()')->first();
+			$advices = DB::table('advices')->where('author', 'Epictetus')->orWhere('author', 'Seneca')->orWhere('author', 'Marcus Aurelius')->orderByRaw('RAND()')->first();
 		}
 		elseif (isset($epictetus) && isset($seneca) && !isset($marcus))
 		{
@@ -137,10 +133,10 @@ class WelcomeController extends Controller {
 
 		$advices = DB::table('advices')->where('advice_id', $id)->first();
 		if ($advices === null) {
-			$advices = DB::table('advices')->orderByRaw('RAND()')->first();
+			$advices = DB::table('advices')->where('author', 'Epictetus')->orWhere('author', 'Seneca')->orWhere('author', 'Marcus Aurelius')->orderByRaw('RAND()')->first();
 		}
 
-        return view('main.other', ['advices' => $advices, 'epictetus' => session('epictetus'), 'seneca' => session('seneca'), 'marcus' => session('marcus')]);
+        return view('main.advice', ['advices' => $advices, 'epictetus' => session('epictetus'), 'seneca' => session('seneca'), 'marcus' => session('marcus')]);
 
 
 	}
@@ -149,6 +145,97 @@ class WelcomeController extends Controller {
     public function about() {
         return view('main.about');
     }
+
+	public function getQuote() {
+		$max = DB::table('advices')->where('author', 'Various Quotes')->max('advice_id');
+		$min = DB::table('advices')->where('author', 'Various Quotes')->min('advice_id');
+		$quote_id = mt_rand($min, $max);
+
+		$quote = DB::table('advices')->where('advice_id', $quote_id)->first();
+
+		switch($quote->book) {
+			case 'Epictetus':
+				$quote->link = "http://amzn.to/299Fohg";
+				break;
+			case 'Seneca':
+				$quote->link = "http://amzn.to/29f0eiD";
+				break;
+			case 'Marcus Aurelius':
+				$quote->link = "http://amzn.to/29bSsaK";
+				break;
+		}
+		$pic = mt_rand(1, 25);
+
+		return view('main.quote', ['quote' => $quote, 'pic' => $pic]);
+	}
+
+	public function newQuote() {
+
+		$max = DB::table('advices')->where('author', 'Various Quotes')->max('advice_id');
+		$min = DB::table('advices')->where('author', 'Various Quotes')->min('advice_id');
+		$quote_id = mt_rand($min, $max);
+
+		$quote = DB::table('advices')->where('advice_id', $quote_id)->first();
+
+		switch($quote->book) {
+			case 'Epictetus':
+				$quote->link = "http://amzn.to/299Fohg";
+				break;
+			case 'Seneca':
+				$quote->link = "http://amzn.to/29f0eiD";
+				break;
+			case 'Marcus Aurelius':
+				$quote->link = "http://amzn.to/29bSsaK";
+				break;
+			case 'Cicero':
+				$quote->link = "http://amzn.to/29fxoeH";
+				break;
+			case 'Musonius Rufus':
+				$quote->link = "http://amzn.to/29ke71W";
+				break;
+			case 'Zeno of Citium':
+				$quote->link = "http://amzn.to/29l4n4z";
+				break;
+		}
+
+		return response()->json(['quote' => $quote]);
+
+
+	}
+
+	public function singleQuote(Request $request) {
+		$quote_id = $request->id;
+
+		$quote = DB::table('advices')->where('advice_id', $quote_id)->first();
+
+		switch($quote->book) {
+			case 'Epictetus':
+				$quote->link = "http://amzn.to/299Fohg";
+				break;
+			case 'Seneca':
+				$quote->link = "http://amzn.to/29f0eiD";
+				break;
+			case 'Marcus Aurelius':
+				$quote->link = "http://amzn.to/29bSsaK";
+				break;
+			case 'Cicero':
+				$quote->link = "http://amzn.to/29fxoeH";
+				break;
+			case 'Musonius Rufus':
+				$quote->link = "http://amzn.to/29ke71W";
+				break;
+			case 'Zeno of Citium':
+				$quote->link = "http://amzn.to/29l4n4z";
+				break;
+		}
+		$pic = mt_rand(1, 25);
+
+		return view('main.single_quote', ['quote' => $quote, 'pic' => $pic]);
+	}
+
+	public function books() {
+		return view('main.books');
+	}
 
 
 }
